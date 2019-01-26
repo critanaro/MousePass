@@ -1,5 +1,6 @@
 # MousePass
 Protecting information one click at a time
 
-this is a test
-Hello 
+short project description
+
+Instructions to run file
