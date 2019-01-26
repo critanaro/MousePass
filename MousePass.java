@@ -4,38 +4,38 @@ package mousepass;
 import javax.swing.*;
 
 public class MousePass {
+  public static void main(String[] args) throws InterruptedException {
+          // Initialize interface
+          setup();
 
 
-    public static void main(String[] args) {
-      // Create frame and buttons
-      JFrame f=new JFrame();//creating instance of JFrame
+      }
+      
+      static int[] mousePos() {
+          // Returns array containing mouse position
+          Point p = MouseInfo.getPointerInfo().getLocation();
+          return new int[]{p.x, p.y};
+      }
 
-      JButton no = new JButton("No");//creating instance of JButton
-      no.setBounds(50,50,200, 80);//x axis, y axis, width, height
-      f.add(no);//adding button in JFrame
+      static void setup() {
+          // Creates frame and buttons
+          JFrame f=new JFrame();//creating instance of JFrame
 
-      JButton yes = new JButton("Yes");//creating instance of JButton
-      yes.setBounds(1225,50,200, 80);//x axis, y axis, width, height
-      f.add(yes);//adding button in JFrame
+          JButton no = new JButton("No");//creating instance of JButton
+          no.setBounds(50,50,200, 80);//x axis, y axis, width, height
+          f.add(no);//adding button in JFrame
 
-      JButton na = new JButton("N/A");//creating instance of JButton
-      na.setBounds(650,50,200, 80);//x axis, y axis, width, height
-      f.add(na);//adding button in JFrame
+          JButton yes = new JButton("Yes");//creating instance of JButton
+          yes.setBounds(1225,50,200, 80);//x axis, y axis, width, height
+          f.add(yes);//adding button in JFrame
 
-      f.setSize(1500,750);//400 width and 500 height
-      f.setLayout(null);//using no layout managers
-      f.setVisible(true);//making the frame visible
+          JButton na = new JButton("N/A");//creating instance of JButton
+          na.setBounds(650,50,200, 80);//x axis, y axis, width, height
+          f.add(na);//adding button in JFrame
 
-      // How to detect mouse pos
-      /*while(true) {
-        Point p = MouseInfo.getPointerInfo().getLocation();
-        int x = p.x;
-        int y = p.y;
-        System.out.println("x pos: " + x);
-        System.out.println("y pos: " + y + "\n");
-        Thread.sleep(100);
-      }*/
-
-    }
+          f.setSize(1500,750);//400 width and 500 height
+          f.setLayout(null);//using no layout managers
+          f.setVisible(true);//making the frame visible
+      }
 
 }
