@@ -1,5 +1,5 @@
 
-package mousthsch;
+package mousepass;
 
 import javax.swing.*;
 import java.awt.*;
@@ -57,9 +57,6 @@ public class MousePass extends JFrame implements ActionListener {
         labelBegin.setSize(1500, 1100);
         labelBegin.setLocation(5, 5);
         f.add(labelBegin);
-
-        // Add image
-        f.add(new JLabel(new ImageIcon("logo.png")));
 
         f.setSize(1500,750);//400 width and 500 height
         f.setLayout(null);//using no layout managers
@@ -164,7 +161,7 @@ public class MousePass extends JFrame implements ActionListener {
                 time = System.currentTimeMillis();
 
                 count++;
-
+                missionComplete = false;
               }
             }
           );
@@ -238,27 +235,27 @@ public class MousePass extends JFrame implements ActionListener {
                         Thread.sleep(10);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(MousePass.class.getName()).log(Level.SEVERE, null, ex);
-                    }   
+                    }
                 }
-                else{ 
+                else{
                     if(missionComplete == false) {
                         // filter results
                         int lenArr = mouseRecord.size();
                         if(lenArr > 5000) {
-                            // Remove end entries until len == 5000
+                            // Remove end entries until len == 400
                             while(mouseRecord.size() > 400) mouseRecord.remove(mouseRecord.size());
                         } else if (lenArr < 5000) {
                             while(mouseRecord.size() < 400) mouseRecord.add(new int[] {0, 0});
                         }
-                        
-    
+
+
                         String filename = "inputdata" + count + ".txt";
                         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                                 new FileOutputStream(filename), "utf-8")))
                         {
                             for (int[] points : mouseRecord)
                             {
-                                    //System.out.println(points[0]+ ", " + points[1] + "\n");
+                                    System.out.println(points[0]+ ", " + points[1] + "\n");
                                     writer.write(points[0]+ ", " + points[1] + "\n");
                                 }
                         } catch (UnsupportedEncodingException e1) {
@@ -271,7 +268,7 @@ public class MousePass extends JFrame implements ActionListener {
                                         // TODO Auto-generated catch block
                                         e1.printStackTrace();
                                 }
-                       //mouseRecord.clear();
+                        mouseRecord.clear();
                         missionComplete = true;
                     }
                 }
@@ -287,7 +284,29 @@ public class MousePass extends JFrame implements ActionListener {
         yes.setVisible(false);
         na.setVisible(false);
 
-        labelQuestion.setText("ASDFASDF");
+        labelQuestion.setText("");
+
+        JLabel labelAcc = new JLabel("Michael Sprinton's Account", JLabel.CENTER);
+        labelAcc.setFont(new Font("Arial", Font.BOLD, 20));
+        labelAcc.setSize(1100, 200);
+        labelAcc.setLocation(50, 0);
+        f.add(labelAcc);
+
+        JLabel labelAcc2 = new JLabel("Routing Number: 031176110", JLabel.CENTER);
+        labelAcc2.setFont(new Font("Arial", Font.PLAIN, 20));
+        labelAcc2.setSize(1000, 200);
+        labelAcc2.setLocation(50, 50);
+        f.add(labelAcc2);
+
+        JLabel labelAcc3 = new JLabel("Thank you for your patience.", JLabel.CENTER);
+        labelAcc3.setFont(new Font("Arial", Font.PLAIN, 20));
+        labelAcc3.setSize(700, 200);
+        labelAcc3.setLocation(0, 100);
+        f.add(labelAcc3);
+
+        labelAcc.setVisible(true);
+        labelAcc2.setVisible(true);
+        labelAcc3.setVisible(true);
 
     }
 
