@@ -227,6 +227,7 @@ public class MousePass extends JFrame implements ActionListener {
 
 
         // Ask questions
+        ArrayList<int[]> mouseRecordMaster = new ArrayList<int[]>();
         while(!exit) {
              Thread.sleep(1);
              //To change number of trials, modify the "count-1" term to be less
@@ -239,31 +240,14 @@ public class MousePass extends JFrame implements ActionListener {
                 if(lenArr > 400) {
                     // Remove end entries until len == 400
                     while(mouseRecord.size() > 400) mouseRecord.remove(mouseRecord.size()-1);
-                } else if (lenArr < 5000) {
+                } else if (lenArr < 400) {
                     while(mouseRecord.size() < 400) mouseRecord.add(new int[] {0, 0});
                 }
 
+                for(int[] elem : mouseRecord) {
+                    mouseRecordMaster.add(elem);
+                }
 
-                String filename = "inputdata" + count + ".csv";
-                try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                        new FileOutputStream(filename), "utf-8")))
-                {
-                    for (int[] points : mouseRecord)
-                    {
-                            //System.out.println(points[0]+ ", " + points[1] + "\n");
-                            writer.write(points[0]+ ", " + points[1] + "\n");
-                        }
-                    writer.close();
-                } catch (UnsupportedEncodingException e1) {
-                                // TODO Auto-generated catch block
-                                e1.printStackTrace();
-                        } catch (FileNotFoundException e1) {
-                                // TODO Auto-generated catch block
-                                e1.printStackTrace();
-                        } catch (IOException e1) {
-                                // TODO Auto-generated catch block
-                                e1.printStackTrace();
-                        }
                 mouseRecord.clear();
 
                 buttonClicked = false;
@@ -287,16 +271,30 @@ public class MousePass extends JFrame implements ActionListener {
                         if(lenArr > 400) {
                             // Remove end entries until len == 400
                             while(mouseRecord.size() > 400) mouseRecord.remove(mouseRecord.size()-1);
-                        } else if (lenArr < 5000) {
+                        } else if (lenArr < 400) {
                             while(mouseRecord.size() < 400) mouseRecord.add(new int[] {0, 0});
                         }
 
+                        for(int[] elem : mouseRecord) {
+                            mouseRecordMaster.add(elem);
+                        }
+                        mouseRecord.clear();
+                        missionComplete = true;
+                    }
+                }
+            }
 
-                        String filename = "inputdata" + count + ".csv";
+            //This keeps the program running
+
+            //System.out.println("Count: " + count);
+
+        }
+
+        String filename = "inputdata.csv";
                         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                                 new FileOutputStream(filename), "utf-8")))
                         {
-                            for (int[] points : mouseRecord)
+                            for (int[] points : mouseRecordMaster)
                             {
                                     //System.out.println(points[0]+ ", " + points[1] + "\n");
                                     writer.write(points[0]+ ", " + points[1] + "\n");
@@ -312,17 +310,7 @@ public class MousePass extends JFrame implements ActionListener {
                                         // TODO Auto-generated catch block
                                         e1.printStackTrace();
                                 }
-                        mouseRecord.clear();
-                        missionComplete = true;
-                    }
-                }
-            }
 
-            //This keeps the program running
-
-            //System.out.println("Count: " + count);
-
-        }
         no.setVisible(false);
         yes.setVisible(false);
         na.setVisible(false);
