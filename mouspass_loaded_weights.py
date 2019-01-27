@@ -47,7 +47,7 @@ model.load_weights(saved_model_path)
 
 f = open('printfile.txt', 'w')
 counter2 = 0
-for i in range(0,4):
+for i in range(0,7):
     #print (i)
     masterlistq = masterlist[i]
     img = (np.expand_dims(masterlistq, 0))

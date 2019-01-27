@@ -18,7 +18,7 @@ with open('trainingdatafinal.csv') as csvfile:
             list = []
         list.append((int(row[0]), int(row[1])))
         counter += 1
-with open('5trueexamples.csv') as csvfile:
+with open('5falseexamples.csv') as csvfile:
     readCSV = csv.reader(csvfile, delimiter=',')
     masterlisttest = []
     list = []
@@ -110,9 +110,8 @@ model.fit(train_images, train_labels,  epochs = 10,
            callbacks = [cp_callback], verbose =0)  # pass callback to training
 
 #tests while untrained
-
-#loss, acc = model.evaluate(test_images, test_labels)
-#print("trained model, accuracy: {:5.2f}%".format(100*acc))
+loss, acc = model.evaluate(test_images, test_labels)
+print("trained model, accuracy: {:5.2f}%".format(100*acc))
 
 """
 model1.load_weights(checkpoint_path)
