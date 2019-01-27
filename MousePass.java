@@ -13,35 +13,56 @@ public class MousePass extends JFrame implements ActionListener {
     static int numQuestions = 20;
 
     public static void main(String[] args) throws InterruptedException, Exception {
-        // Creates frame and buttons
+        // Create interface
         JFrame f = new JFrame();//creating instance of JFrame
+
+        // Add starting text
+        JLabel labelBegin = new JLabel("Click the button below to login to your account", JLabel.CENTER);
+        labelBegin.setFont(new Font("Arial", Font.ITALIC, 40));
+        labelBegin.setSize(1500, 400);
+        labelBegin.setLocation(5, 5);
+        f.add(labelBegin);
+
+        f.setSize(1500,750);//400 width and 500 height
+        f.setLayout(null);//using no layout managers
+        f.setVisible(true);//making the frame visible
 
         JButton start = new JButton("Start");
         start.setBounds(650,400,200, 80);//x axis, y axis, width, height
         start.setFont(new Font("Arial", Font.BOLD, 40));
         f.add(start);//adding button in JFrame
 
-        f.setSize(1500,750);//400 width and 500 height
-        f.setLayout(null);//using no layout managers
-        f.setVisible(true);//making the frame visible
-
-        // Read in questions
-        String[] questions = readFile("questions.txt");
-
         JButton no = new JButton("No");//creating instance of JButton
         no.setBounds(50,50,200, 80);//x axis, y axis, width, height
         no.setFont(new Font("Arial", Font.PLAIN, 20));
-        f.add(no);//adding button in JFrame
 
         JButton yes = new JButton("Yes");//creating instance of JButton
         yes.setBounds(1225,50,200, 80);//x axis, y axis, width, height
         yes.setFont(new Font("Arial", Font.PLAIN, 20));
-        f.add(yes);//adding button in JFrame
 
         JButton na = new JButton("N/A");//creating instance of JButton
         na.setBounds(650,50,200, 80);//x axis, y axis, width, height
         na.setFont(new Font("Arial", Font.PLAIN, 20));
+
+        f.add(no);//adding button in JFrame
+        f.add(yes);//adding button in JFrame
         f.add(na);//adding button in JFrame
+
+        no.setVisible(false);
+        yes.setVisible(false);
+        na.setVisible(false);
+
+        // Read in questions
+        String[] questions = readFile("questions.txt");
+
+        // Add question text
+        JLabel labelQuestion = new JLabel("[Question]", JLabel.CENTER);
+        labelQuestion.setFont(new Font("Arial", Font.PLAIN, 30));
+        labelQuestion.setSize(1500, 900);
+        labelQuestion.setLocation(5, 5);
+        f.add(labelQuestion);
+        labelQuestion.setVisible(false);
+
 
         // Button action listeners
         start.addActionListener(
@@ -52,9 +73,20 @@ public class MousePass extends JFrame implements ActionListener {
                 no.setVisible(true);
                 yes.setVisible(true);
                 na.setVisible(true);
+                labelQuestion.setVisible(true);
+
+                labelBegin.setText("");
+
+                // Add instruction text
+                JLabel labelInstr = new JLabel("Answer the following questions to access your account", JLabel.CENTER);
+                labelInstr.setFont(new Font("Arial", Font.PLAIN, 25));
+                labelInstr.setSize(1500, 1200);
+                labelInstr.setLocation(5, 5);
+                f.add(labelInstr);
               }
             }
           );
+
 
     }
 
