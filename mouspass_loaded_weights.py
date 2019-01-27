@@ -1,4 +1,8 @@
 import csv
+import sys
+with open("did_it_work3", "w") as f:
+    f.write("yeehaw")
+    f.write(sys.version)
 import tensorflow as tf
 import numpy as np
 from tensorflow import keras
@@ -18,7 +22,7 @@ with open('inputdata.csv') as csvfile:
             pass
         elif counter % lengthofoneq == 0:
             masterlist.append(list)
-            print(len(list), list, masterlist)
+            #print(len(list), list, masterlist)
             list = []
         # elif counter == 1999:
         #     masterlist.append(list)
@@ -28,8 +32,7 @@ with open('inputdata.csv') as csvfile:
         counter += 1
 
 
-
-print(masterlist)
+#print(masterlist)
 saved_model_path = "training_1/cp.ckpt"
 model = keras.Sequential([
     keras.layers.Flatten(input_shape=(lengthofoneq, 2)),
@@ -52,9 +55,9 @@ for i in range(0,7):
     masterlistq = masterlist[i]
     img = (np.expand_dims(masterlistq, 0))
     predictions_single = model.predict(img)
-    print(predictions_single)
+    #print(predictions_single)
     x = np.argmax(predictions_single[0])
-    print(x)
+    #print(x)
     counter2 += x
 if counter2 >= 4:
     f.write("True")

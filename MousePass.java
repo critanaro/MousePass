@@ -314,10 +314,15 @@ public class MousePass extends JFrame implements ActionListener {
         no.setVisible(false);
         yes.setVisible(false);
         na.setVisible(false);
-
+        //Thread.sleep(2000);
         Process p = Runtime.getRuntime().exec("python mouspass_loaded_weights.py");
+        //BufferedReader br = new BufferedReader(new FileReader("printfile.txt"));
+        //Process p = Runtime.getRuntime().exec("python testing.py");
+        labelQuestion.setText("Processing...");
+        labelInstr.setText("");
+        Thread.sleep(4000);
         BufferedReader br = new BufferedReader(new FileReader("printfile.txt"));
-
+        
         boolean read_from_printfile = Boolean.parseBoolean(br.readLine());
         System.out.println("read_from_printfile: " + read_from_printfile);
 
@@ -325,7 +330,7 @@ public class MousePass extends JFrame implements ActionListener {
         labelAcc.setFont(new Font("Arial", Font.BOLD, 20));
         labelAcc.setSize(300, 200);
         labelAcc.setLocation(55, 0);
-        f.add(labelAcc);
+        f.add(labelAcc); 
 
         JLabel labelAcc2 = new JLabel("Routing Number: 031176110", JLabel.CENTER);
         labelAcc2.setFont(new Font("Arial", Font.PLAIN, 20));
