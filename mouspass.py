@@ -48,6 +48,7 @@ print(tf.__version__)
 train_labels = np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0])
 train_images = masterlist
 #train_labels = np.array([1,1,0,0])
+#test_images = masterlisttest
 test_images = masterlist
 test_labels = train_labels
 #test_labels = np.array([1,1,1,1])
@@ -57,6 +58,8 @@ print (test_images)
 train_images = np.asarray(train_images)
 # test_images = [[(0,0),(0,0),(1,2),(3,4),(6,7),(9,11),(0,0)],[(0,1),(0,0),(1,2),(3,5),(6,7),(10,11),(0,0)]]
 test_images = np.asarray(test_images)
+train_images = train_images / 1500.0
+test_images = test_images / 1500.0
 # train_labels = np.array([1, 0])
 # test_labels = np.array([1, 1])
 #train_labels = np.asarray(train_labels)
@@ -77,18 +80,16 @@ class_names = ['True','False']
 #Build the model
 
 
-def create_model():
-	model = tf.keras.models.Sequential([
-    	keras.layers.Flatten(input_shape=(lengthofoneq, 2)),
-    	keras.layers.Dense(1280, activation=tf.nn.relu),
-    	keras.layers.Dense(2, activation=tf.nn.softmax)
+
+model = tf.keras.models.Sequential([
+	keras.layers.Flatten(input_shape=(lengthofoneq, 2)),
+	keras.layers.Dense(1280, activation=tf.nn.relu),
+	keras.layers.Dense(2, activation=tf.nn.softmax)
 	])
 
-	model.compile(optimizer='adam',
-        	      loss=tf.keras.losses.sparse_categorical_crossentropy,
-        	      metrics=['accuracy'])
-
-	return model 
+model.compile(optimizer='adam',
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
 
 """
 model = create_model()
@@ -102,17 +103,16 @@ checkpoint_dir = os.path.dirname(checkpoint_path)
 cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path,
                                                  save_weights_only=True,
                                                  verbose=1)
-model1 = create_model()
 
-model1.fit(train_images, train_labels,  epochs = 10,
+#model.fit(train_images, train_labels, epochs=10)
+model.fit(train_images, train_labels,  epochs = 10,
            validation_data = (test_images,test_labels),
            callbacks = [cp_callback], verbose =0)  # pass callback to training
 
-model = create_model()
 #tests while untrained
 
-loss, acc = model.evaluate(test_images, test_labels)
-print("Untrained model, accuracy: {:5.2f}%".format(100*acc))
+#loss, acc = model.evaluate(test_images, test_labels)
+#print("trained model, accuracy: {:5.2f}%".format(100*acc))
 
 """
 model1.load_weights(checkpoint_path)
@@ -121,11 +121,11 @@ print("Restored model, accuracy: {:5.2f}%".format(100*acc))
 """
 """
 #testing
-"""
-test_loss, test_acc = model1.evaluate(test_images, test_labels)
+
+test_loss, test_acc = model.evaluate(test_images, test_labels)
 
 print('Test accuracy:', test_acc)
-"""
+
 
 img = test_images[1]
 img = (np.expand_dims(img, 0))

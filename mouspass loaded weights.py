@@ -3,7 +3,7 @@ import tensorflow as tf
 import numpy as np
 from tensorflow import keras
 lengthofoneq = 400#10,000
-lengthtotal = 20#50,000
+lengthtotal = 2000#50,000
 ### IMPORT FROM CSV
 with open('5trueexamples.csv') as csvfile:
     readCSV = csv.reader(csvfile, delimiter=',')
@@ -13,11 +13,17 @@ with open('5trueexamples.csv') as csvfile:
     for row in readCSV:
         #print (counter)
         if counter == 0:
+            list.append((int(row[0]), int(row[1])))
+            counter+=1
             pass
         elif counter % lengthofoneq == 0:
             masterlist.append(list)
             print(len(list), list, masterlist)
             list = []
+        # elif counter == 1999:
+        #     masterlist.append(list)
+        #     print(len(list), list, masterlist)
+        #     list = []
         list.append((int(row[0]), int(row[1])))
         counter += 1
 
@@ -34,6 +40,10 @@ model = keras.Sequential([
 model.compile(optimizer='adam',
                loss=tf.keras.losses.sparse_categorical_crossentropy,
                metrics=['accuracy'])
+
+model.load_weights(saved_model_path)
+#loss,acc = model.evaluate(test_images, test_labels)
+#print("Restored model, accuracy: {:5.2f}%".format(100*acc))
 
 f = open('printfile.txt', 'w')
 counter2 = 0
