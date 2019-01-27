@@ -16,10 +16,13 @@ print(tf.__version__)
 
 train_images = [[(0,0),(0,0),(1,2),(3,4),(6,7),(9,11),(0,0)],[(0,0),(6,5),(3,4),(7,6),(10,4),(9,13),(0,0)]]
 train_images = np.asarray(train_images)
-train_labels = [1,0]
-train_labels = np.asarray(train_labels)
+train_labels = np.array([0, 1])
+#train_labels = np.asarray(train_labels)
 class_names = ['True','False']
-
+print (train_images)
+print (train_images.shape)
+print (len(train_labels))
+print (train_labels)
 #class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 #test
 #train_images = train_images / 255.0
@@ -31,7 +34,7 @@ class_names = ['True','False']
 
 
 model = keras.Sequential([
-    #keras.layers.Flatten(input_shape=(28, 28)), - not needed as this takes a 2d array for each pic and transforms it into a 1d array.
+    keras.layers.Flatten(input_shape=(7, 2)),
     keras.layers.Dense(128, activation=tf.nn.relu),
     keras.layers.Dense(2, activation=tf.nn.softmax)
 ])
