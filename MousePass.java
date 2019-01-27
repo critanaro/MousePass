@@ -379,6 +379,7 @@ public class MousePass extends JFrame implements ActionListener {
         labelSucc.setSize(500, 200);
         labelSucc.setLocation(-50, 400);
         f.add(labelSucc);
+<<<<<<< HEAD
 
         labelAcc.setVisible(true);
         labelAcc2.setVisible(true);
@@ -411,6 +412,31 @@ public class MousePass extends JFrame implements ActionListener {
             labelAcc6.setVisible(false);
             labelAcc7.setVisible(false);
             labelSucc.setVisible(false);
+=======
+        
+        System.out.println(read_from_printfile);
+        if (read_from_printfile == true)
+        {
+          	        labelAcc.setVisible(true);
+        	        labelAcc2.setVisible(true);
+        	        labelAcc3.setVisible(true);
+        	        labelAcc4.setVisible(true);
+        	        labelAcc5.setVisible(true);
+        	        labelAcc6.setVisible(true);
+        	        labelAcc7.setVisible(true);
+        	        labelSucc.setVisible(true);
+        }
+        else
+        {
+  	        labelAcc.setVisible(true);
+	        labelAcc2.setVisible(false);
+	        labelAcc3.setVisible(false);
+	        labelAcc4.setVisible(false);
+	        labelAcc5.setVisible(false);
+	        labelAcc6.setVisible(false);
+	        labelAcc7.setVisible(false);
+	        labelSucc.setVisible(false);        	
+>>>>>>> f19a399e69df4805afee80e0dbeeb43d7076087e
         }
 
         labelQuestion.setText("");
