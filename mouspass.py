@@ -102,20 +102,20 @@ cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path,
                                                  verbose=1)
 
 #stores training data and gets it back
-model = create_model()
+model1 = create_model()
 
-model.fit(train_images, train_labels,  epochs = 100,
+model1.fit(train_images, train_labels,  epochs = 100,
            validation_data = (test_images,test_labels),
 		   #validation_data = (train_images,train_labels),
            callbacks = [cp_callback], verbose =0)  # pass callback to training
 
 
-loss, acc = model.evaluate(test_images, test_labels)
+loss, acc = model1.evaluate(test_images, test_labels)
 print("Untrained model, accuracy: {:5.2f}%".format(100*acc))
 
 
-model.load_weights(checkpoint_path)
-loss,acc = model.evaluate(test_images, test_labels)
+model1.load_weights(checkpoint_path)
+loss,acc = model1.evaluate(test_images, test_labels)
 print("Restored model, accuracy: {:5.2f}%".format(100*acc))
 """
 #testing
