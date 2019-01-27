@@ -1,5 +1,5 @@
 
-package mousthsch;
+package mousepass;
 
 import javax.swing.*;
 import java.awt.*;
@@ -99,6 +99,14 @@ public class MousePass extends JFrame implements ActionListener {
         f.add(labelQuestion);
         labelQuestion.setVisible(false);
 
+        JLabel labelInstr = new JLabel("Answer the following questions to access your account", JLabel.CENTER);
+        // Add instruction text
+        labelInstr.setFont(new Font("Arial", Font.PLAIN, 20));
+        labelInstr.setSize(1500, 1250);
+        labelInstr.setLocation(5, 5);
+        f.add(labelInstr);
+        labelInstr.setVisible(false);
+
         // Button action listeners
         start.addActionListener(
             new ActionListener() {
@@ -110,6 +118,7 @@ public class MousePass extends JFrame implements ActionListener {
                 no.setVisible(true);
                 yes.setVisible(true);
                 na.setVisible(true);
+                labelInstr.setVisible(true);
 
                 //Generate question
                 int toAsk = rand.nextInt(numQuestions);
@@ -123,13 +132,6 @@ public class MousePass extends JFrame implements ActionListener {
                 labelDesc2.setText("");
                 labelDesc3.setText("");
 
-                // Add instruction text
-                JLabel labelInstr = new JLabel("Answer the following questions to access your account", JLabel.CENTER);
-                labelInstr.setFont(new Font("Arial", Font.PLAIN, 20));
-                labelInstr.setSize(1500, 1250);
-                labelInstr.setLocation(5, 5);
-                f.add(labelInstr);
-                //buttonClicked = true;
                 count++;
                 }
 
@@ -325,7 +327,7 @@ public class MousePass extends JFrame implements ActionListener {
         yes.setVisible(false);
         na.setVisible(false);
 
-        JLabel labelAcc = new JLabel("Michael Sprinton's Account", JLabel.CENTER);
+        JLabel labelAcc = new JLabel("Michael Sprintson's Account", JLabel.CENTER);
         labelAcc.setFont(new Font("Arial", Font.BOLD, 20));
         labelAcc.setSize(300, 200);
         labelAcc.setLocation(55, 0);
