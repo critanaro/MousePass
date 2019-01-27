@@ -58,7 +58,7 @@ public class MousePass extends JFrame implements ActionListener {
         labelBegin.setLocation(5, 5);
         f.add(labelBegin);
 
-        f.setSize(1500,750);//400 width and 500 height
+        f.setSize(1500,750);//width and height
         f.setLayout(null);//using no layout managers
         f.setVisible(true);//making the frame visible
 
@@ -326,12 +326,11 @@ public class MousePass extends JFrame implements ActionListener {
         no.setVisible(false);
         yes.setVisible(false);
         na.setVisible(false);
-        
+
         Process p = Runtime.getRuntime().exec("python mousepass_loaded_weights.py");
         BufferedReader br = new BufferedReader(new FileReader("printfile.txt"));
-        
-        boolean read_from_printfile = Boolean.parseBoolean(br.readLine());
-        System.out.println(read_from_printfile);
+
+        int read_from_printfile = Integer.parseInt(br.readLine());
 
         JLabel labelAcc = new JLabel("Michael Sprintson's Account", JLabel.CENTER);
         labelAcc.setFont(new Font("Arial", Font.BOLD, 20));
@@ -380,17 +379,39 @@ public class MousePass extends JFrame implements ActionListener {
         labelSucc.setSize(500, 200);
         labelSucc.setLocation(-50, 400);
         f.add(labelSucc);
-        
-        System.out.println(read_from_printfile);
-          	        labelAcc.setVisible(true);
-        	        labelAcc2.setVisible(true);
-        	        labelAcc3.setVisible(true);
-        	        labelAcc4.setVisible(true);
-        	        labelAcc5.setVisible(true);
-        	        labelAcc6.setVisible(true);
-        	        labelAcc7.setVisible(true);
-        	        labelSucc.setVisible(true);
- 
+
+        labelAcc.setVisible(true);
+        labelAcc2.setVisible(true);
+        labelAcc3.setVisible(true);
+        labelAcc4.setVisible(true);
+        labelAcc5.setVisible(true);
+        labelAcc6.setVisible(true);
+        labelAcc7.setVisible(true);
+        labelSucc.setVisible(true);
+
+        if(read_from_printfile == 0) {
+
+            JLabel labelFail = new JLabel("Authentication failed...", JLabel.CENTER);
+            labelFail.setFont(new Font("Arial", Font.BOLD, 20));
+            labelFail.setSize(300, 200);
+            labelFail.setLocation(55, 0);
+            f.add(labelFail);
+
+            JLabel labelFail2 = new JLabel("Are you sure you are logging into the correct account?", JLabel.CENTER);
+            labelFail2.setFont(new Font("Arial", Font.PLAIN, 20));
+            labelFail2.setSize(900, 200);
+            labelFail2.setLocation(-115, 50);
+            f.add(labelFail2);
+
+            labelAcc.setVisible(false);
+            labelAcc2.setVisible(false);
+            labelAcc3.setVisible(false);
+            labelAcc4.setVisible(false);
+            labelAcc5.setVisible(false);
+            labelAcc6.setVisible(false);
+            labelAcc7.setVisible(false);
+            labelSucc.setVisible(false);
+        }
 
         labelQuestion.setText("");
         labelInstr.setText("");
