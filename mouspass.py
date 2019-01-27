@@ -16,13 +16,16 @@ print(tf.__version__)
 
 train_images = [[(0,0),(0,0),(1,2),(3,4),(6,7),(9,11),(0,0)],[(0,0),(6,5),(3,4),(7,6),(10,4),(9,13),(0,0)]]
 train_images = np.asarray(train_images)
-train_labels = np.array([0, 1])
+test_images = [[(0,0),(0,0),(1,2),(3,4),(6,7),(9,11),(0,0)],[(0,1),(0,0),(1,2),(3,5),(6,7),(10,11),(0,0)]]
+test_images = np.asarray(test_images)
+train_labels = np.array([1, 0])
+test_labels = np.array([1, 1])
 #train_labels = np.asarray(train_labels)
 class_names = ['True','False']
-print (train_images)
-print (train_images.shape)
-print (len(train_labels))
-print (train_labels)
+#print (train_images)
+#print (train_images.shape)
+#print (len(train_labels))
+#print (train_labels)
 #class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 #test
 #train_images = train_images / 255.0
@@ -50,7 +53,7 @@ test_loss, test_acc = model.evaluate(test_images, test_labels)
 print('Test accuracy:', test_acc)
 
 
-img = test_images[0]
+img = test_images[1]
 img = (np.expand_dims(img, 0))
 predictions_single = model.predict(img)
 
