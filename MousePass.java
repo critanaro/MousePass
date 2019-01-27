@@ -326,6 +326,12 @@ public class MousePass extends JFrame implements ActionListener {
         no.setVisible(false);
         yes.setVisible(false);
         na.setVisible(false);
+        
+        Process p = Runtime.getRuntime().exec("python mousepass_loaded_weights.py");
+        BufferedReader br = new BufferedReader(new FileReader("printfile.txt"));
+        
+        boolean read_from_printfile = Boolean.parseBoolean(br.readLine());
+        System.out.println(read_from_printfile);
 
         JLabel labelAcc = new JLabel("Michael Sprintson's Account", JLabel.CENTER);
         labelAcc.setFont(new Font("Arial", Font.BOLD, 20));
@@ -374,15 +380,17 @@ public class MousePass extends JFrame implements ActionListener {
         labelSucc.setSize(500, 200);
         labelSucc.setLocation(-50, 400);
         f.add(labelSucc);
-
-        labelAcc.setVisible(true);
-        labelAcc2.setVisible(true);
-        labelAcc3.setVisible(true);
-        labelAcc4.setVisible(true);
-        labelAcc5.setVisible(true);
-        labelAcc6.setVisible(true);
-        labelAcc7.setVisible(true);
-        labelSucc.setVisible(true);
+        
+        System.out.println(read_from_printfile);
+          	        labelAcc.setVisible(true);
+        	        labelAcc2.setVisible(true);
+        	        labelAcc3.setVisible(true);
+        	        labelAcc4.setVisible(true);
+        	        labelAcc5.setVisible(true);
+        	        labelAcc6.setVisible(true);
+        	        labelAcc7.setVisible(true);
+        	        labelSucc.setVisible(true);
+ 
 
         labelQuestion.setText("");
         labelInstr.setText("");
