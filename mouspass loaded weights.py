@@ -5,7 +5,7 @@ from tensorflow import keras
 lengthofoneq = 400#10,000
 lengthtotal = 2000#50,000
 ### IMPORT FROM CSV
-with open('5trueexamples.csv') as csvfile:
+with open('inputdata.csv') as csvfile:
     readCSV = csv.reader(csvfile, delimiter=',')
     masterlist = []
     list = []
