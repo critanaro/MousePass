@@ -315,10 +315,10 @@ public class MousePass extends JFrame implements ActionListener {
         yes.setVisible(false);
         na.setVisible(false);
 
-        Process p = Runtime.getRuntime().exec("python mousepass_loaded_weights.py");
+        Process p = Runtime.getRuntime().exec("python mouspass_loaded_weights.py");
         BufferedReader br = new BufferedReader(new FileReader("printfile.txt"));
 
-        int read_from_printfile = Integer.parseInt(br.readLine());
+        boolean read_from_printfile = Boolean.parseBoolean(br.readLine());
         System.out.println("read_from_printfile: " + read_from_printfile);
 
         JLabel labelAcc = new JLabel("Michael Sprintson's Account", JLabel.CENTER);
@@ -378,7 +378,7 @@ public class MousePass extends JFrame implements ActionListener {
         labelAcc7.setVisible(true);
         labelSucc.setVisible(true);
 
-        if(read_from_printfile == 0) {
+        if(!read_from_printfile) {
 
             JLabel labelFail = new JLabel("Authentication failed...", JLabel.CENTER);
             labelFail.setFont(new Font("Arial", Font.BOLD, 20));
