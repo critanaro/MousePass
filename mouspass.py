@@ -1,7 +1,23 @@
 import os
+import csv
 # TensorFlow and tf.keras
 import tensorflow as tf
 from tensorflow import keras
+lengthofoneq = 400#10,000
+with open('trainingdatafinal.csv') as csvfile:
+    readCSV = csv.reader(csvfile, delimiter=',')
+    masterlist = []
+    list = []
+    counter = 0
+    for row in readCSV:
+        if counter == 0:
+            pass
+        elif counter % lengthofoneq == 0:
+            masterlist.append(list)
+            list = []
+        list.append((row[0], row[1]))
+        counter += 1
+
 
 # Helper libraries
 import numpy as np
@@ -14,13 +30,14 @@ print(tf.__version__)
 
 
 #Import the DataSet
-
-train_images = [[(0,0),(0,0),(1,2),(3,4),(6,7),(9,11),(0,0)],[(0,0),(6,5),(3,4),(7,6),(10,4),(9,13),(0,0)]]
-train_images = np.asarray(train_images)
-test_images = [[(0,0),(0,0),(1,2),(3,4),(6,7),(9,11),(0,0)],[(0,1),(0,0),(1,2),(3,5),(6,7),(10,11),(0,0)]]
-test_images = np.asarray(test_images)
-train_labels = np.array([1, 0])
-test_labels = np.array([1, 1])
+train_images = masterlist
+train_labels = np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0, 0])
+# train_images = [[(0,0),(0,0),(1,2),(3,4),(6,7),(9,11),(0,0)],[(0,0),(6,5),(3,4),(7,6),(10,4),(9,13),(0,0)]]
+# train_images = np.asarray(train_images)
+# test_images = [[(0,0),(0,0),(1,2),(3,4),(6,7),(9,11),(0,0)],[(0,1),(0,0),(1,2),(3,5),(6,7),(10,11),(0,0)]]
+# test_images = np.asarray(test_images)
+# train_labels = np.array([1, 0])
+# test_labels = np.array([1, 1])
 #train_labels = np.asarray(train_labels)
 class_names = ['True','False']
 #print (train_images)

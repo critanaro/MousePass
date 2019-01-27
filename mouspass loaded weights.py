@@ -2,7 +2,7 @@ import csv
 import tensorflow as tf
 import numpy as np
 from tensorflow import keras
-lengthofoneq = 4#10,000
+lengthofoneq = 400#10,000
 lengthtotal = 20#50,000
 ### IMPORT FROM CSV
 with open('example.csv') as csvfile:
