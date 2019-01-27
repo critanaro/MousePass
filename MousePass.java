@@ -1,5 +1,5 @@
 
-package mousepass;
+package mousthsch;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +23,8 @@ public class MousePass extends JFrame implements ActionListener {
     static int[] dummyVal = new int[]{0, 0};
     static ArrayList<int[]> mouseRecord = new ArrayList<int[]>();
     static boolean firstRun = false;
+    static boolean buttonClicked = false;
+    static boolean missionComplete = false;
 
     public static void main(String[] args) throws InterruptedException, Exception {
         // Create interface
@@ -110,9 +112,6 @@ public class MousePass extends JFrame implements ActionListener {
 
               }
 
-
-
-
           );
 
 
@@ -145,161 +144,112 @@ public class MousePass extends JFrame implements ActionListener {
           );
 
         yes.addActionListener(
-            new ActionListener() {
-              @Override
-              public void actionPerformed(ActionEvent e) {
-                // Timing stuff
-                ArrayList<int[]> mouseRecord = new ArrayList<int[]>();
-                while(System.currentTimeMillis() - time < 5000) {
-                    try {
-                        mouseRecord.add(mousePos());
-                        Thread.sleep(10);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(MousePass.class.getName()).log(Level.SEVERE, null, ex);
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                      //Reset mouse pos
+                      try {
+                          Robot robot = new Robot();
+                          robot.mouseMove(650, 400);
+                      } catch (AWTException ex) {
+                          Logger.getLogger(MousePass.class.getName()).log(Level.SEVERE, null, ex);
+                      }
+
+                      //Generate new question
+                      int toAsk = rand.nextInt(numQuestions);
+                      while(asked[toAsk]) toAsk = rand.nextInt(numQuestions);
+                      asked[toAsk] = true;
+                      labelQuestion.setText(questions[toAsk]);
+                      labelQuestion.setVisible(true);
+
+                      // Timing stuff
+                      time = System.currentTimeMillis();
+
+                      count++;
+
                     }
-                }
-                String filename = "inputdata" + count + ".txt";
-                try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(filename), "utf-8")))
-                {
-                        for (int[] points : mouseRecord)
-                        {
-                                writer.write(points[0]+ ", " + points[1] + "\n");
-                        }
-                } catch (UnsupportedEncodingException e1) {
-                                // TODO Auto-generated catch block
-                                e1.printStackTrace();
-                        } catch (FileNotFoundException e1) {
-                                // TODO Auto-generated catch block
-                                e1.printStackTrace();
-                        } catch (IOException e1) {
-                                // TODO Auto-generated catch block
-                                e1.printStackTrace();
-                        }
-                count++;
-                try {
-                    Robot robot = new Robot();
-                    robot.mouseMove(650, 400);
-                } catch (AWTException ex) {
-                    Logger.getLogger(MousePass.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                //Generate new question
-                int toAsk = rand.nextInt(numQuestions);
-                while(asked[toAsk]) toAsk = rand.nextInt(numQuestions);
-                asked[toAsk] = true;
-                labelQuestion.setText(questions[toAsk]);
-                labelQuestion.setVisible(true);
-
-                //Set time
-                time = System.currentTimeMillis();
-              }
-            }
+                  }
           );
 
         na.addActionListener(
-            new ActionListener() {
-              @Override
-              public void actionPerformed(ActionEvent e) {
-                // Timing stuff
-                ArrayList<int[]> mouseRecord = new ArrayList<int[]>();
-                while(System.currentTimeMillis() - time < 5000) {
-                    try {
-                        mouseRecord.add(mousePos());
-                        Thread.sleep(10);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(MousePass.class.getName()).log(Level.SEVERE, null, ex);
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                      //Reset mouse pos
+                      try {
+                          Robot robot = new Robot();
+                          robot.mouseMove(650, 400);
+                      } catch (AWTException ex) {
+                          Logger.getLogger(MousePass.class.getName()).log(Level.SEVERE, null, ex);
+                      }
+
+                      //Generate new question
+                      int toAsk = rand.nextInt(numQuestions);
+                      while(asked[toAsk]) toAsk = rand.nextInt(numQuestions);
+                      asked[toAsk] = true;
+                      labelQuestion.setText(questions[toAsk]);
+                      labelQuestion.setVisible(true);
+
+                      // Timing stuff
+                      time = System.currentTimeMillis();
+
+                      count++;
+
                     }
-                }
-                String filename = "inputdata" + count + ".txt";
-                try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(filename), "utf-8")))
-                {
-                        for (int[] points : mouseRecord)
-                        {
-                                writer.write(points[0]+ ", " + points[1] + "\n");
-                        }
-                } catch (UnsupportedEncodingException e1) {
-                                // TODO Auto-generated catch block
-                                e1.printStackTrace();
-                        } catch (FileNotFoundException e1) {
-                                // TODO Auto-generated catch block
-                                e1.printStackTrace();
-                        } catch (IOException e1) {
-                                // TODO Auto-generated catch block
-                                e1.printStackTrace();
-                        }
-                count++;
-                try {
-                    Robot robot = new Robot();
-                    robot.mouseMove(650, 400);
-                } catch (AWTException ex) {
-                    Logger.getLogger(MousePass.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                //Generate new question
-                int toAsk = rand.nextInt(numQuestions);
-                while(asked[toAsk]) toAsk = rand.nextInt(numQuestions);
-                asked[toAsk] = true;
-                labelQuestion.setText(questions[toAsk]);
-                labelQuestion.setVisible(true);
-
-                //Set time
-                time = System.currentTimeMillis();
-              }
-            }
+                  }
           );
 
 
 
         // Ask questions
         while(!exit) {
-
-            //log time
-            if(System.currentTimeMillis() - time < 5000 && firstRun != false)  {
-                System.out.println(System.currentTimeMillis() - time);
-                try {
-                    mouseRecord.add(mousePos());
-                    Thread.sleep(10);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(MousePass.class.getName()).log(Level.SEVERE, null, ex);
+                //log time
+            if(firstRun == true) {
+                if(System.currentTimeMillis() - time < 5000)  {
+                    //System.out.println(System.currentTimeMillis() - time);
+                    try {
+                        mouseRecord.add(mousePos());
+                        Thread.sleep(10);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(MousePass.class.getName()).log(Level.SEVERE, null, ex);
+                    }   
                 }
-
-            }
-            else {
-                if(firstRun == true) {
-                    // filter results
-                    int lenArr = mouseRecord.size();
-                    if(lenArr > 5000) {
-                        // Remove end entries until len == 5000
-                        while(mouseRecord.size() > 5000) mouseRecord.remove(mouseRecord.size());
-                    } else if (lenArr < 5000) {
-                        while(mouseRecord.size() < 5000) mouseRecord.add(new int[] {0, 0});
-                    }
-
-                    String filename = "inputdata" + count + ".txt";
-                    try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                            new FileOutputStream(filename), "utf-8")))
-                    {
-                        for (int[] points : mouseRecord)
+                else{ 
+                    if(missionComplete == false) {
+                        // filter results
+                        int lenArr = mouseRecord.size();
+                        if(lenArr > 5000) {
+                            // Remove end entries until len == 5000
+                            while(mouseRecord.size() > 400) mouseRecord.remove(mouseRecord.size());
+                        } else if (lenArr < 5000) {
+                            while(mouseRecord.size() < 400) mouseRecord.add(new int[] {0, 0});
+                        }
+                        
+    
+                        String filename = "inputdata" + count + ".txt";
+                        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                                new FileOutputStream(filename), "utf-8")))
                         {
-                                System.out.println(points[0]+ ", " + points[1] + "\n");
-                                writer.write(points[0]+ ", " + points[1] + "\n");
-                            }
-                    } catch (UnsupportedEncodingException e1) {
-                                    // TODO Auto-generated catch block
-                                    e1.printStackTrace();
-                            } catch (FileNotFoundException e1) {
-                                    // TODO Auto-generated catch block
-                                    e1.printStackTrace();
-                            } catch (IOException e1) {
-                                    // TODO Auto-generated catch block
-                                    e1.printStackTrace();
-                            }
-                    mouseRecord.clear();
+                            for (int[] points : mouseRecord)
+                            {
+                                    //System.out.println(points[0]+ ", " + points[1] + "\n");
+                                    writer.write(points[0]+ ", " + points[1] + "\n");
+                                }
+                        } catch (UnsupportedEncodingException e1) {
+                                        // TODO Auto-generated catch block
+                                        e1.printStackTrace();
+                                } catch (FileNotFoundException e1) {
+                                        // TODO Auto-generated catch block
+                                        e1.printStackTrace();
+                                } catch (IOException e1) {
+                                        // TODO Auto-generated catch block
+                                        e1.printStackTrace();
+                                }
+                       //mouseRecord.clear();
+                        missionComplete = true;
+                    }
                 }
-             }
-
+            }
 
             //This keeps the program running
 
