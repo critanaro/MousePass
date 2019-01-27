@@ -2,21 +2,23 @@ import csv
 import tensorflow as tf
 import numpy as np
 from tensorflow import keras
-lengthofoneq = 4#10,000
+lengthofoneq = 400#10,000
 lengthtotal = 20#50,000
 ### IMPORT FROM CSV
-with open('example.csv') as csvfile:
+with open('5trueexamples.csv') as csvfile:
     readCSV = csv.reader(csvfile, delimiter=',')
     masterlist = []
     list = []
     counter = 0
     for row in readCSV:
+        #print (counter)
         if counter == 0:
             pass
         elif counter % lengthofoneq == 0:
             masterlist.append(list)
+            print(len(list), list, masterlist)
             list = []
-        list.append((row[0], row[1]))
+        list.append((int(row[0]), int(row[1])))
         counter += 1
 
 
@@ -36,6 +38,7 @@ model.compile(optimizer='adam',
 f = open('printfile.txt', 'w')
 counter2 = 0
 for i in range(0,4):
+    #print (i)
     masterlistq = masterlist[i]
     img = (np.expand_dims(masterlistq, 0))
     predictions_single = model.predict(img)
