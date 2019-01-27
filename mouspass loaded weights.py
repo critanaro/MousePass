@@ -24,7 +24,7 @@ with open('5trueexamples.csv') as csvfile:
 
 
 print(masterlist)
-saved_model_path = "cp.ckpt.data-00000-of-00001"
+saved_model_path = "training_1/cp.ckpt"
 model = keras.Sequential([
     keras.layers.Flatten(input_shape=(lengthofoneq, 2)),
     keras.layers.Dense(128, activation=tf.nn.relu),
