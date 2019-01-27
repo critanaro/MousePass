@@ -2,7 +2,7 @@ import csv
 import tensorflow as tf
 import numpy as np
 from tensorflow import keras
-lengthofoneq = 400#10,000
+lengthofoneq = 4#10,000
 lengthtotal = 20#50,000
 ### IMPORT FROM CSV
 with open('example.csv') as csvfile:
@@ -16,7 +16,7 @@ with open('example.csv') as csvfile:
         elif counter % lengthofoneq == 0:
             masterlist.append(list)
             list = []
-        list.append((row[0], row[1]))
+        list.append((int(row[0]), int(row[1])))
         counter += 1
 
 
