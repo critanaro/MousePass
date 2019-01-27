@@ -18,7 +18,7 @@ with open('trainingdatafinal.csv') as csvfile:
             list = []
         list.append((int(row[0]), int(row[1])))
         counter += 1
-with open('inputdata7.csv') as csvfile:
+with open('5trueexamples.csv') as csvfile:
     readCSV = csv.reader(csvfile, delimiter=',')
     masterlisttest = []
     list = []
@@ -49,7 +49,7 @@ train_labels = np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
 train_images = masterlist
 #train_labels = np.array([1,1,0,0])
 test_images = masterlisttest
-test_labels = np.array([0])
+test_labels = np.array([1,1,1,1])
 print (train_images)
 print (test_images)
 # train_images = [[(0,0),(0,0),(1,2),(3,4),(6,7),(9,11),(0,0)],[(0,0),(6,5),(3,4),(7,6),(10,4),(9,13),(0,0)]]
@@ -79,7 +79,7 @@ class_names = ['True','False']
 def create_model():
 	model = tf.keras.models.Sequential([
     	keras.layers.Flatten(input_shape=(lengthofoneq, 2)),
-    	keras.layers.Dense(128, activation=tf.nn.relu),
+    	keras.layers.Dense(1200, activation=tf.nn.relu),
     	keras.layers.Dense(2, activation=tf.nn.softmax)
 	])
 
@@ -104,7 +104,7 @@ cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path,
 #stores training data and gets it back
 model = create_model()
 
-model.fit(train_images, train_labels,  epochs = 10,
+model.fit(train_images, train_labels,  epochs = 100,
            validation_data = (test_images,test_labels),
 		   #validation_data = (train_images,train_labels),
            callbacks = [cp_callback], verbose =0)  # pass callback to training
