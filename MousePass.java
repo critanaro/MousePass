@@ -1,5 +1,5 @@
 
-package mousepass;
+package mousthsch; 
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,10 +21,13 @@ public class MousePass extends JFrame implements ActionListener {
     static boolean done = true;
     static boolean clicked = false;
     static int[] dummyVal = new int[]{0, 0};
+    static ArrayList<int[]> mouseRecord = new ArrayList<int[]>();
+    static boolean firstRun = false;
 
     public static void main(String[] args) throws InterruptedException, Exception {
         // Create interface
         JFrame f = new JFrame();//creating instance of JFrame
+        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         // Add starting text
         JLabel labelBegin = new JLabel("Click the button below to login to your account", JLabel.CENTER);
@@ -79,6 +82,8 @@ public class MousePass extends JFrame implements ActionListener {
             new ActionListener() {
               @Override
               public void actionPerformed(ActionEvent e) {
+                    time = System.currentTimeMillis();  
+                    firstRun = true;
                 start.setVisible(false);
                 no.setVisible(true);
                 yes.setVisible(true);
@@ -99,14 +104,18 @@ public class MousePass extends JFrame implements ActionListener {
                 labelInstr.setSize(1500, 1250);
                 labelInstr.setLocation(5, 5);
                 f.add(labelInstr);
+                
 
                 System.out.println("here");
-
-                time = System.currentTimeMillis();
-
+                
+                count++;
+                }
 
               }
-            }
+            
+            
+            
+            
           );
 
 
@@ -131,7 +140,9 @@ public class MousePass extends JFrame implements ActionListener {
 
                 // Timing stuff
                 ArrayList<int[]> mouseRecord = new ArrayList<int[]>();
+                time = System.currentTimeMillis();
                 while(System.currentTimeMillis() - time < 5000) {
+                    System.out.println(System.currentTimeMillis() - time);
                     try {
                         mouseRecord.add(mousePos());
                         Thread.sleep(10);
@@ -141,7 +152,7 @@ public class MousePass extends JFrame implements ActionListener {
                 }
                 String filename = "inputdata" + count + ".txt";
                 try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-        		new FileOutputStream(filename), "utf-8")))
+                new FileOutputStream(filename), "utf-8")))
                 {
                         for (int[] points : mouseRecord)
                         {
@@ -159,8 +170,6 @@ public class MousePass extends JFrame implements ActionListener {
                         }
                 count++;
 
-                //Set time
-                time = System.currentTimeMillis();
               }
             }
           );
@@ -181,7 +190,7 @@ public class MousePass extends JFrame implements ActionListener {
                 }
                 String filename = "inputdata" + count + ".txt";
                 try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-        		new FileOutputStream(filename), "utf-8")))
+                new FileOutputStream(filename), "utf-8")))
                 {
                         for (int[] points : mouseRecord)
                         {
@@ -234,7 +243,7 @@ public class MousePass extends JFrame implements ActionListener {
                 }
                 String filename = "inputdata" + count + ".txt";
                 try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-        		new FileOutputStream(filename), "utf-8")))
+                new FileOutputStream(filename), "utf-8")))
                 {
                         for (int[] points : mouseRecord)
                         {
@@ -272,8 +281,50 @@ public class MousePass extends JFrame implements ActionListener {
           );
 
 
+   
         // Ask questions
         while(!exit) {
+            
+            //log time 
+            if(System.currentTimeMillis() - time < 5000 && firstRun != false)  {
+                System.out.println(System.currentTimeMillis() - time);
+                try {
+                    mouseRecord.add(mousePos());
+                    Thread.sleep(10);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(MousePass.class.getName()).log(Level.SEVERE, null, ex);
+                }
+ 
+            }
+            else {
+                if(firstRun == true) {
+                
+                String filename = "inputdata" + count + ".txt";
+                try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                        new FileOutputStream(filename), "utf-8")))
+                {
+                    for (int[] points : mouseRecord)
+                    {
+                            System.out.println(points[0]+ ", " + points[1] + "\n");
+                            writer.write(points[0]+ ", " + points[1] + "\n");
+                        }
+                } catch (UnsupportedEncodingException e1) {
+                                // TODO Auto-generated catch block
+                                e1.printStackTrace();
+                        } catch (FileNotFoundException e1) {
+                                // TODO Auto-generated catch block
+                                e1.printStackTrace();
+                        } catch (IOException e1) {
+                                // TODO Auto-generated catch block
+                                e1.printStackTrace();
+                        }
+                mouseRecord.clear();
+                }
+             }
+            
+            
+            //This keeps the program running
+            
             //System.out.println("Count: " + count);
             Thread.sleep(1);
             if(count > numAsk) exit = true;
