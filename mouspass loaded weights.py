@@ -11,19 +11,9 @@ with open('example.csv') as csvfile:
     list = []
     counter = 0
     for row in readCSV:
-        if counter == lengthofoneq:
-            masterlist.append(list)
-            list = []
-        if counter == 2 * lengthofoneq:
-            masterlist.append(list)
-            list = []
-        if counter == 3 * lengthofoneq:
-            masterlist.append(list)
-            list = []
-        if counter == 4 * lengthofoneq:
-            masterlist.append(list)
-            list = []
-        if counter == 5 * lengthofoneq:
+        if counter == 0:
+            pass
+        elif counter % lengthofoneq == 0:
             masterlist.append(list)
             list = []
         list.append((row[0], row[1]))
