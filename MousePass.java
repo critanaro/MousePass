@@ -1,5 +1,5 @@
 
-package mousepass;
+package mousthsch;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +16,7 @@ public class MousePass extends JFrame implements ActionListener {
     static Random rand = new Random();
     static int numAsk = 5;
     static long time = 0;
-    static int count = 1;
+    static int count = -1;
     static boolean exit = false;
     static boolean done = true;
     static boolean clicked = false;
@@ -129,7 +129,7 @@ public class MousePass extends JFrame implements ActionListener {
                 labelInstr.setSize(1500, 1250);
                 labelInstr.setLocation(5, 5);
                 f.add(labelInstr);
-
+                //buttonClicked = true;
                 count++;
                 }
 
@@ -159,7 +159,7 @@ public class MousePass extends JFrame implements ActionListener {
 
                 // Timing stuff
                 time = System.currentTimeMillis();
-
+                buttonClicked = true;
                 count++;
                 missionComplete = false;
               }
@@ -187,9 +187,9 @@ public class MousePass extends JFrame implements ActionListener {
 
                       // Timing stuff
                       time = System.currentTimeMillis();
-
+                      buttonClicked = true;
                       count++;
-
+                      missionComplete = false;
                     }
                   }
           );
@@ -215,9 +215,9 @@ public class MousePass extends JFrame implements ActionListener {
 
                       // Timing stuff
                       time = System.currentTimeMillis();
-
+                      buttonClicked = true;
                       count++;
-
+                      missionComplete = false;
                     }
                   }
           );
@@ -226,8 +226,46 @@ public class MousePass extends JFrame implements ActionListener {
 
         // Ask questions
         while(!exit) {
+             Thread.sleep(1);
+             //To change number of trials, modify the "count-1" term to be less
+             if(count-1 > numAsk) exit = true;
                 //log time
-            if(firstRun == true) {
+            if(buttonClicked == true && System.currentTimeMillis() - time < 5000) {
+                // filter results
+                int lenArr = mouseRecord.size();
+                System.out.println(lenArr);
+                if(lenArr > 5000) {
+                    // Remove end entries until len == 400
+                    while(mouseRecord.size() > 400) mouseRecord.remove(mouseRecord.size());
+                } else if (lenArr < 5000) {
+                    while(mouseRecord.size() < 400) mouseRecord.add(new int[] {0, 0});
+                }
+
+
+                String filename = "inputdata" + count + ".txt";
+                try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                        new FileOutputStream(filename), "utf-8")))
+                {
+                    for (int[] points : mouseRecord)
+                    {
+                            //System.out.println(points[0]+ ", " + points[1] + "\n");
+                            writer.write(points[0]+ ", " + points[1] + "\n");
+                        }
+                } catch (UnsupportedEncodingException e1) {
+                                // TODO Auto-generated catch block
+                                e1.printStackTrace();
+                        } catch (FileNotFoundException e1) {
+                                // TODO Auto-generated catch block
+                                e1.printStackTrace();
+                        } catch (IOException e1) {
+                                // TODO Auto-generated catch block
+                                e1.printStackTrace();
+                        }
+                mouseRecord.clear();
+                
+                buttonClicked = false;
+            }
+            if(firstRun == true ) {
                 if(System.currentTimeMillis() - time < 5000)  {
                     //System.out.println(System.currentTimeMillis() - time);
                     try {
@@ -237,10 +275,12 @@ public class MousePass extends JFrame implements ActionListener {
                         Logger.getLogger(MousePass.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                else{
+                
+              if(buttonClicked == true && System.currentTimeMillis() - time > 5000) {
                     if(missionComplete == false) {
                         // filter results
                         int lenArr = mouseRecord.size();
+                        System.out.println(lenArr);
                         if(lenArr > 5000) {
                             // Remove end entries until len == 400
                             while(mouseRecord.size() > 400) mouseRecord.remove(mouseRecord.size());
@@ -255,7 +295,7 @@ public class MousePass extends JFrame implements ActionListener {
                         {
                             for (int[] points : mouseRecord)
                             {
-                                    System.out.println(points[0]+ ", " + points[1] + "\n");
+                                    //System.out.println(points[0]+ ", " + points[1] + "\n");
                                     writer.write(points[0]+ ", " + points[1] + "\n");
                                 }
                         } catch (UnsupportedEncodingException e1) {
@@ -277,8 +317,7 @@ public class MousePass extends JFrame implements ActionListener {
             //This keeps the program running
 
             //System.out.println("Count: " + count);
-            Thread.sleep(1);
-            if(count > numAsk) exit = true;
+           
         }
         no.setVisible(false);
         yes.setVisible(false);
