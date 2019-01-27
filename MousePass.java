@@ -95,6 +95,31 @@ public class MousePass extends JFrame implements ActionListener {
             }
           );
 
+        ArrayList<int[]> mouseRecord = new ArrayList<int[]>();
+        int x = 0;
+        while (x<1000)
+        {
+        	mouseRecord.add(mousePos());
+        	Thread.sleep(10);
+        	x++;
+        }
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+        		new FileOutputStream("inputdata.txt"), "utf-8"))) 
+        {
+        	for (int[]points:mouseRecord)
+        	{
+        		writer.write(points[0]+ ", " + points[1] + "\n");
+        	}        	
+        } catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
     }
 
