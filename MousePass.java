@@ -1,13 +1,18 @@
+
 package mousepass;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.*;
+import java.io.*;
+import java.util.*;
 
 public class MousePass extends JFrame implements ActionListener {
 
-    public static void main(String[] args) throws InterruptedException {
+    static int numQuestions = 20;
+
+    public static void main(String[] args) throws InterruptedException, Exception {
         // Creates frame and buttons
         JFrame f = new JFrame();//creating instance of JFrame
 
@@ -20,6 +25,8 @@ public class MousePass extends JFrame implements ActionListener {
         f.setLayout(null);//using no layout managers
         f.setVisible(true);//making the frame visible
 
+        // Read in questions
+        String[] questions = readFile("questions.txt");
 
         JButton no = new JButton("No");//creating instance of JButton
         no.setBounds(50,50,200, 80);//x axis, y axis, width, height
@@ -52,6 +59,13 @@ public class MousePass extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {}
+
+    static String[] readFile(String filename) throws Exception {
+        BufferedReader br = new BufferedReader(new FileReader(filename));
+        String[] contents = new String[numQuestions];
+        for(int i=0; i<numQuestions; i++) contents[i] = br.readLine();
+        return contents;
+    }
 
     static int[] mousePos() {
         // Returns array containing mouse position
