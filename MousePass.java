@@ -11,6 +11,7 @@ import java.util.*;
 public class MousePass extends JFrame implements ActionListener {
 
     static int numQuestions = 20;
+    static Random rand = new Random();
 
     public static void main(String[] args) throws InterruptedException, Exception {
         // Create interface
@@ -54,6 +55,7 @@ public class MousePass extends JFrame implements ActionListener {
 
         // Read in questions
         String[] questions = readFile("questions.txt");
+        boolean[] asked = new boolean[numQuestions];
 
         // Add question text
         JLabel labelQuestion = new JLabel("[Question]", JLabel.CENTER);
@@ -73,6 +75,12 @@ public class MousePass extends JFrame implements ActionListener {
                 no.setVisible(true);
                 yes.setVisible(true);
                 na.setVisible(true);
+
+                //Generate question
+                int toAsk = rand.nextInt(numQuestions);
+                while(asked[toAsk]) toAsk = rand.nextInt(numQuestions);
+                asked[toAsk] = true;
+                labelQuestion.setText(questions[toAsk]);
                 labelQuestion.setVisible(true);
 
                 labelBegin.setText("");
