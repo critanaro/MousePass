@@ -331,6 +331,7 @@ public class MousePass extends JFrame implements ActionListener {
         BufferedReader br = new BufferedReader(new FileReader("printfile.txt"));
 
         int read_from_printfile = Integer.parseInt(br.readLine());
+        System.out.println("read_from_printfile: " + read_from_printfile);
 
         JLabel labelAcc = new JLabel("Michael Sprintson's Account", JLabel.CENTER);
         labelAcc.setFont(new Font("Arial", Font.BOLD, 20));
