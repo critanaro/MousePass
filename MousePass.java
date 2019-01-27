@@ -118,10 +118,11 @@ public class MousePass extends JFrame implements ActionListener {
                         Logger.getLogger(MousePass.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
+                String filename = "inputdata" + count + ".txt";
                 try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-        		new FileOutputStream("inputdata.txt"), "utf-8")))
+        		new FileOutputStream(filename), "utf-8")))
                 {
-                        for (int[]points:mouseRecord)
+                        for (int[] points : mouseRecord)
                         {
                                 writer.write(points[0]+ ", " + points[1] + "\n");
                         }
@@ -143,14 +144,15 @@ public class MousePass extends JFrame implements ActionListener {
                     Logger.getLogger(MousePass.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-
-
                 //Generate new question
                 int toAsk = rand.nextInt(numQuestions);
                 while(asked[toAsk]) toAsk = rand.nextInt(numQuestions);
                 asked[toAsk] = true;
                 labelQuestion.setText(questions[toAsk]);
                 labelQuestion.setVisible(true);
+
+                //Set time
+                time = System.currentTimeMillis();
               }
             }
           );
