@@ -11,7 +11,7 @@ According to the [Pew Institute](http://www.pewinternet.org/2017/01/26/2-passwor
 
 One of our goals with MousePass is to assist the elderly population in becoming more secure online and less vulnerable to scam artists and phishing attacks. The Pew Institute continues that "older users are more likely to say they primarily [wrote] thier passwords down on a piece of paper". Technologies such as password managers and two factor authentication are not often utilized by the elderly, with [61%](http://www.pewinternet.org/2017/01/26/2-password-management-and-mobile-security/) reporting that they do not use two factor authentication. MousePass utilizes a simple interface which is easily accessible to those of all ages and greatly increases the security of our grapdmnas and grandpas.
 
-Even among those technologically adept, just 30% of "online adults worry about the overall security of their online passwords" and just 14% use complex passwords rather than simple ones. MousePass solves this by removing the need for passwords at all, instead relying on the human nature to remember intimate and special momories. Logging into your accouunt with MousePass is simple and effective, yet fun and exciting. 
+Even among those technologically adept, just 30% of "online adults worry about the overall security of their online passwords" and just 14% use complex passwords rather than simple ones. MousePass solves this by removing the need for passwords at all, instead relying on the human nature to remember intimate and special momories. Logging into your account with MousePass is simple and effective, yet fun and exciting. 
 
 
 
