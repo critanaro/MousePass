@@ -79,7 +79,7 @@ class_names = ['True','False']
 def create_model():
 	model = tf.keras.models.Sequential([
     	keras.layers.Flatten(input_shape=(lengthofoneq, 2)),
-    	keras.layers.Dense(1200, activation=tf.nn.relu),
+    	keras.layers.Dense(128, activation=tf.nn.relu),
     	keras.layers.Dense(2, activation=tf.nn.softmax)
 	])
 
@@ -89,9 +89,10 @@ def create_model():
 
 	return model 
 
+"""
 model = create_model()
 model.summary()
-
+"""
 #create checkpoints
 checkpoint_path = "training_1/cp.ckpt"
 checkpoint_dir = os.path.dirname(checkpoint_path)
@@ -100,23 +101,22 @@ checkpoint_dir = os.path.dirname(checkpoint_path)
 cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpoint_path,
                                                  save_weights_only=True,
                                                  verbose=1)
-
-#stores training data and gets it back
 model1 = create_model()
 
 model1.fit(train_images, train_labels,  epochs = 100,
            validation_data = (test_images,test_labels),
-		   #validation_data = (train_images,train_labels),
            callbacks = [cp_callback], verbose =0)  # pass callback to training
 
-
+#tests while untrained
+"""
 loss, acc = model1.evaluate(test_images, test_labels)
 print("Untrained model, accuracy: {:5.2f}%".format(100*acc))
-
-
+"""
+"""
 model1.load_weights(checkpoint_path)
 loss,acc = model1.evaluate(test_images, test_labels)
 print("Restored model, accuracy: {:5.2f}%".format(100*acc))
+"""
 """
 #testing
 test_loss, test_acc = model.evaluate(test_images, test_labels)
