@@ -18,6 +18,9 @@ public class MousePass extends JFrame implements ActionListener {
     static long time = 0;
     static int count = 1;
     static boolean exit = false;
+    static boolean done = true;
+    static boolean clicked = false;
+    static int[] dummyVal = new int[]{0, 0};
 
     public static void main(String[] args) throws InterruptedException, Exception {
         // Create interface
@@ -97,7 +100,11 @@ public class MousePass extends JFrame implements ActionListener {
                 labelInstr.setLocation(5, 5);
                 f.add(labelInstr);
 
+                System.out.println("here");
+
                 time = System.currentTimeMillis();
+
+
               }
             }
           );
@@ -107,10 +114,64 @@ public class MousePass extends JFrame implements ActionListener {
             new ActionListener() {
               @Override
               public void actionPerformed(ActionEvent e) {
+                //Reset mouse pos
+                try {
+                    Robot robot = new Robot();
+                    robot.mouseMove(650, 400);
+                } catch (AWTException ex) {
+                    Logger.getLogger(MousePass.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                //Generate new question
+                int toAsk = rand.nextInt(numQuestions);
+                while(asked[toAsk]) toAsk = rand.nextInt(numQuestions);
+                asked[toAsk] = true;
+                labelQuestion.setText(questions[toAsk]);
+                labelQuestion.setVisible(true);
 
                 // Timing stuff
                 ArrayList<int[]> mouseRecord = new ArrayList<int[]>();
-                if(System.currentTimeMillis() - time < 10000) {
+                while(System.currentTimeMillis() - time < 5000) {
+                    try {
+                        mouseRecord.add(mousePos());
+                        Thread.sleep(10);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(MousePass.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                String filename = "inputdata" + count + ".txt";
+                try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+        		new FileOutputStream(filename), "utf-8")))
+                {
+                        for (int[] points : mouseRecord)
+                        {
+                                writer.write(points[0]+ ", " + points[1] + "\n");
+                        }
+                } catch (UnsupportedEncodingException e1) {
+                                // TODO Auto-generated catch block
+                                e1.printStackTrace();
+                        } catch (FileNotFoundException e1) {
+                                // TODO Auto-generated catch block
+                                e1.printStackTrace();
+                        } catch (IOException e1) {
+                                // TODO Auto-generated catch block
+                                e1.printStackTrace();
+                        }
+                count++;
+
+                //Set time
+                time = System.currentTimeMillis();
+              }
+            }
+          );
+
+        yes.addActionListener(
+            new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent e) {
+                // Timing stuff
+                ArrayList<int[]> mouseRecord = new ArrayList<int[]>();
+                while(System.currentTimeMillis() - time < 5000) {
                     try {
                         mouseRecord.add(mousePos());
                         Thread.sleep(10);
@@ -157,30 +218,55 @@ public class MousePass extends JFrame implements ActionListener {
             }
           );
 
-        yes.addActionListener(
-            new ActionListener() {
-              @Override
-              public void actionPerformed(ActionEvent e) {
-                //Generate new question
-                int toAsk = rand.nextInt(numQuestions);
-                while(asked[toAsk]) toAsk = rand.nextInt(numQuestions);
-                asked[toAsk] = true;
-                labelQuestion.setText(questions[toAsk]);
-                labelQuestion.setVisible(true);
-              }
-            }
-          );
-
         na.addActionListener(
             new ActionListener() {
               @Override
               public void actionPerformed(ActionEvent e) {
+                // Timing stuff
+                ArrayList<int[]> mouseRecord = new ArrayList<int[]>();
+                while(System.currentTimeMillis() - time < 5000) {
+                    try {
+                        mouseRecord.add(mousePos());
+                        Thread.sleep(10);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(MousePass.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                String filename = "inputdata" + count + ".txt";
+                try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+        		new FileOutputStream(filename), "utf-8")))
+                {
+                        for (int[] points : mouseRecord)
+                        {
+                                writer.write(points[0]+ ", " + points[1] + "\n");
+                        }
+                } catch (UnsupportedEncodingException e1) {
+                                // TODO Auto-generated catch block
+                                e1.printStackTrace();
+                        } catch (FileNotFoundException e1) {
+                                // TODO Auto-generated catch block
+                                e1.printStackTrace();
+                        } catch (IOException e1) {
+                                // TODO Auto-generated catch block
+                                e1.printStackTrace();
+                        }
+                count++;
+                try {
+                    Robot robot = new Robot();
+                    robot.mouseMove(650, 400);
+                } catch (AWTException ex) {
+                    Logger.getLogger(MousePass.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
                 //Generate new question
                 int toAsk = rand.nextInt(numQuestions);
                 while(asked[toAsk]) toAsk = rand.nextInt(numQuestions);
                 asked[toAsk] = true;
                 labelQuestion.setText(questions[toAsk]);
                 labelQuestion.setVisible(true);
+
+                //Set time
+                time = System.currentTimeMillis();
               }
             }
           );
