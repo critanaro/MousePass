@@ -30,11 +30,34 @@ public class MousePass extends JFrame implements ActionListener {
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         // Add starting text
-        JLabel labelBegin = new JLabel("Click the button below to login to your account", JLabel.CENTER);
-        labelBegin.setFont(new Font("Arial", Font.ITALIC, 40));
-        labelBegin.setSize(1500, 400);
+        JLabel labelDesc = new JLabel("             We at Charles Schwab have implemented some safety measures to help "
+                + "protect your account.", JLabel.CENTER);
+        labelDesc.setFont(new Font("Arial", Font.PLAIN, 20));
+        labelDesc.setSize(1100, 200);
+        labelDesc.setLocation(50, 0);
+        f.add(labelDesc);
+
+        JLabel labelDesc2 = new JLabel("               Please answer the following short security questions "
+                + "to gain access to your account.", JLabel.CENTER);
+        labelDesc2.setFont(new Font("Arial", Font.PLAIN, 20));
+        labelDesc2.setSize(1000, 200);
+        labelDesc2.setLocation(50, 50);
+        f.add(labelDesc2);
+
+        JLabel labelDesc3 = new JLabel("Thank you for your patience.", JLabel.CENTER);
+        labelDesc3.setFont(new Font("Arial", Font.PLAIN, 20));
+        labelDesc3.setSize(700, 200);
+        labelDesc3.setLocation(0, 100);
+        f.add(labelDesc3);
+
+        JLabel labelBegin = new JLabel("Click the button above to begin this process", JLabel.CENTER);
+        labelBegin.setFont(new Font("Arial", Font.ITALIC, 30));
+        labelBegin.setSize(1500, 1100);
         labelBegin.setLocation(5, 5);
         f.add(labelBegin);
+
+        // Add image
+        f.add(new JLabel(new ImageIcon("logo.png")));
 
         f.setSize(1500,750);//400 width and 500 height
         f.setLayout(null);//using no layout managers
@@ -97,6 +120,9 @@ public class MousePass extends JFrame implements ActionListener {
                 labelQuestion.setVisible(true);
 
                 labelBegin.setText("");
+                labelDesc.setText("");
+                labelDesc2.setText("");
+                labelDesc3.setText("");
 
                 // Add instruction text
                 JLabel labelInstr = new JLabel("Answer the following questions to access your account", JLabel.CENTER);
