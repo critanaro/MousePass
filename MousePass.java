@@ -263,7 +263,7 @@ public class MousePass extends JFrame implements ActionListener {
                                 e1.printStackTrace();
                         }
                 mouseRecord.clear();
-                
+
                 buttonClicked = false;
             }
             if(firstRun == true ) {
@@ -276,7 +276,7 @@ public class MousePass extends JFrame implements ActionListener {
                         Logger.getLogger(MousePass.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                
+
               if(buttonClicked == true && System.currentTimeMillis() - time > 5000) {
                     if(missionComplete == false) {
                         // filter results
@@ -319,35 +319,71 @@ public class MousePass extends JFrame implements ActionListener {
             //This keeps the program running
 
             //System.out.println("Count: " + count);
-           
+
         }
         no.setVisible(false);
         yes.setVisible(false);
         na.setVisible(false);
 
-        labelQuestion.setText("");
-
         JLabel labelAcc = new JLabel("Michael Sprinton's Account", JLabel.CENTER);
         labelAcc.setFont(new Font("Arial", Font.BOLD, 20));
-        labelAcc.setSize(1100, 200);
-        labelAcc.setLocation(50, 0);
+        labelAcc.setSize(300, 200);
+        labelAcc.setLocation(55, 0);
         f.add(labelAcc);
 
         JLabel labelAcc2 = new JLabel("Routing Number: 031176110", JLabel.CENTER);
         labelAcc2.setFont(new Font("Arial", Font.PLAIN, 20));
-        labelAcc2.setSize(1000, 200);
-        labelAcc2.setLocation(50, 50);
+        labelAcc2.setSize(300, 200);
+        labelAcc2.setLocation(51, 50);
         f.add(labelAcc2);
 
-        JLabel labelAcc3 = new JLabel("Thank you for your patience.", JLabel.CENTER);
+        JLabel labelAcc3 = new JLabel("Account Number: 2732522652226868", JLabel.CENTER);
         labelAcc3.setFont(new Font("Arial", Font.PLAIN, 20));
-        labelAcc3.setSize(700, 200);
-        labelAcc3.setLocation(0, 100);
+        labelAcc3.setSize(500, 200);
+        labelAcc3.setLocation(-5, 100);
         f.add(labelAcc3);
+
+        JLabel labelAcc4 = new JLabel("Balance: enough to live comfortably for 3-4 days", JLabel.CENTER);
+        labelAcc4.setFont(new Font("Arial", Font.PLAIN, 20));
+        labelAcc4.setSize(500, 200);
+        labelAcc4.setLocation(40, 150);
+        f.add(labelAcc4);
+
+        JLabel labelAcc5 = new JLabel("Recent transactions: TAMUhack Registration: FREE!!!", JLabel.CENTER);
+        labelAcc5.setFont(new Font("Arial", Font.PLAIN, 20));
+        labelAcc5.setSize(500, 200);
+        labelAcc5.setLocation(65, 200);
+        f.add(labelAcc5);
+
+        JLabel labelAcc6 = new JLabel("Instant Ramen 48-pack: $13", JLabel.CENTER);
+        labelAcc6.setFont(new Font("Arial", Font.PLAIN, 20));
+        labelAcc6.setSize(300, 200);
+        labelAcc6.setLocation(240, 250);
+        f.add(labelAcc6);
+
+        JLabel labelAcc7 = new JLabel("Starbucks: $148 for a large coffee", JLabel.CENTER);
+        labelAcc7.setFont(new Font("Arial", Font.PLAIN, 20));
+        labelAcc7.setSize(500, 200);
+        labelAcc7.setLocation(165, 300);
+        f.add(labelAcc7);
+
+        JLabel labelSucc = new JLabel("Authentication succeeded...", JLabel.CENTER);
+        labelSucc.setFont(new Font("Arial", Font.PLAIN, 20));
+        labelSucc.setSize(500, 200);
+        labelSucc.setLocation(-50, 400);
+        f.add(labelSucc);
 
         labelAcc.setVisible(true);
         labelAcc2.setVisible(true);
         labelAcc3.setVisible(true);
+        labelAcc4.setVisible(true);
+        labelAcc5.setVisible(true);
+        labelAcc6.setVisible(true);
+        labelAcc7.setVisible(true);
+        labelSucc.setVisible(true);
+
+        labelQuestion.setText("");
+        labelInstr.setText("");
 
     }
 
