@@ -1,5 +1,5 @@
 
-package mousthsch;
+package mousepass;
 
 import javax.swing.*;
 import java.awt.*;
@@ -234,15 +234,15 @@ public class MousePass extends JFrame implements ActionListener {
                 // filter results
                 int lenArr = mouseRecord.size();
                 System.out.println(lenArr);
-                if(lenArr > 5000) {
+                if(lenArr > 400) {
                     // Remove end entries until len == 400
-                    while(mouseRecord.size() > 400) mouseRecord.remove(mouseRecord.size());
+                    while(mouseRecord.size() > 400) mouseRecord.remove(mouseRecord.size()-1);
                 } else if (lenArr < 5000) {
                     while(mouseRecord.size() < 400) mouseRecord.add(new int[] {0, 0});
                 }
 
 
-                String filename = "inputdata" + count + ".txt";
+                String filename = "inputdata" + count + ".csv";
                 try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                         new FileOutputStream(filename), "utf-8")))
                 {
@@ -251,6 +251,7 @@ public class MousePass extends JFrame implements ActionListener {
                             //System.out.println(points[0]+ ", " + points[1] + "\n");
                             writer.write(points[0]+ ", " + points[1] + "\n");
                         }
+                    writer.close();
                 } catch (UnsupportedEncodingException e1) {
                                 // TODO Auto-generated catch block
                                 e1.printStackTrace();
@@ -281,15 +282,15 @@ public class MousePass extends JFrame implements ActionListener {
                         // filter results
                         int lenArr = mouseRecord.size();
                         System.out.println(lenArr);
-                        if(lenArr > 5000) {
+                        if(lenArr > 400) {
                             // Remove end entries until len == 400
-                            while(mouseRecord.size() > 400) mouseRecord.remove(mouseRecord.size());
+                            while(mouseRecord.size() > 400) mouseRecord.remove(mouseRecord.size()-1);
                         } else if (lenArr < 5000) {
                             while(mouseRecord.size() < 400) mouseRecord.add(new int[] {0, 0});
                         }
 
 
-                        String filename = "inputdata" + count + ".txt";
+                        String filename = "inputdata" + count + ".csv";
                         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                                 new FileOutputStream(filename), "utf-8")))
                         {
@@ -298,6 +299,7 @@ public class MousePass extends JFrame implements ActionListener {
                                     //System.out.println(points[0]+ ", " + points[1] + "\n");
                                     writer.write(points[0]+ ", " + points[1] + "\n");
                                 }
+                            writer.close();
                         } catch (UnsupportedEncodingException e1) {
                                         // TODO Auto-generated catch block
                                         e1.printStackTrace();
